@@ -7,7 +7,7 @@
 
     $host = 'localhost';
     $username = 'admin';
-    $password = '1234';
+    $password = 'admin';
     $name = 'cms';
 
         // foreach($db as $key => $value){

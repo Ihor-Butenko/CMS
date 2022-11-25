@@ -63,12 +63,12 @@
 
 
                 <?php
-                
-                    $search = $_GET['search'];
                             
                     if(isset($_GET['submit'])){
 
-                        $searchQuery = "SELECT * FROM post WHERE post_tags LIKE '%$search%'";
+                        $search = $_GET['search'];
+
+                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
 
                         $searchQuery = $connect -> query($searchQuery);
 
