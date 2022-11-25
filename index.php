@@ -68,12 +68,14 @@
 
                         $search = $_GET['search'];
 
+                        $searchError = "";
+
                         $searchRequest = "SELECT * FROM post WHERE post_tags LIKE '%$search%'";
 
                         $searchQuery = $connect -> query($searchRequest);
 
                         if(!$searchQuery or mysqli_num_rows($searchQuery) == 0){
-                            echo "NO RESULT";
+                            $searchError = "Oooops! Not found... Plase try again";
                             // print_r($connect->error_list);
                         }else{
                             echo "SEARCH COMPLETE";
@@ -93,6 +95,9 @@
                                 </button>
                                 </span>
                             </div>
+                            <?php if(isset($_GET['submit'])){ ?>
+                                <div><?php echo "<p class='text-danger'>$searchError</p>"; ?></div>
+                            <?php }?>
                         </form>   
                     <!-- /.input-group -->
                 </div>
