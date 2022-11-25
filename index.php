@@ -2,7 +2,7 @@
 
 <?php include "./components/header.php"; ?>
 
-<?php require_once("./db/db.php"); ?>
+<?php include "./db/db.php"; ?>
 
 <body>
 
@@ -68,12 +68,13 @@
 
                         $search = $_GET['search'];
 
-                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
+                        $searchRequest = "SELECT * FROM post WHERE post_tags LIKE '%$search%'";
 
-                        $searchQuery = $connect -> query($searchQuery);
+                        $searchQuery = $connect -> query($searchRequest);
 
-                        if(mysqli_num_rows($searchQuery) == 0){
+                        if(!$searchQuery or mysqli_num_rows($searchQuery) == 0){
                             echo "NO RESULT";
+                            // print_r($connect->error_list);
                         }else{
                             echo "SEARCH COMPLETE";
                         }
