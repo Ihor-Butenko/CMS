@@ -59,32 +59,9 @@
 
                 <!-- Blog Search Well -->
 
-                <div class="well">
+                <?php include "components/search.php"?>
 
-
-                <?php
-                            
-                    if(isset($_GET['submit'])){
-
-                        $search = $_GET['search'];
-
-                        $searchError = "";
-
-                        $searchRequest = "SELECT * FROM post WHERE post_tags LIKE '%$search%'";
-
-                        $searchQuery = $connect -> query($searchRequest);
-
-                        if(!$searchQuery or mysqli_num_rows($searchQuery) == 0){
-                            $searchError = "Oooops! Not found... Plase try again";
-                            // print_r($connect->error_list);
-                        }else{
-                            echo "SEARCH COMPLETE";
-                        }
-
-                    }
-
-                ?>
-
+                <div class="well">              
                     <h4>Blog Search</h4>
                         <form>
                             <div class="input-group">
