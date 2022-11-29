@@ -26,32 +26,20 @@
 
                         $searchQuery = $connect -> query($searchQuery);
 
+                        $errorMessage = "";
+
                         if(mysqli_num_rows($searchQuery) == 0){
-                             echo "NO RESULT";
-                        }else{
-                            echo "SEARCH COMPLETE";
-                        }
+                            $errorMessage = "Ooops...Nothinng found!";
+                        }else{   
+                                while($row = $searchQuery -> fetch_assoc()){  //Post array
+                                    
+                                    $postTitle = $row['post_title'];
+                                    $postAuthor = $row['post_author'];
+                                    $postDate = $row['post_date'];
+                                    $postImg = $row['post_image'];  // Post image
+                                    $postContent = $row['post_content'];
+                        ?>
 
-                    }
-        
-            ?>
-                <!-- First Blog Post -->
-
-                <?php 
-                
-                    $postSelect = "SELECT * FROM post";   
-
-                    $postQuery = $connect -> query($postSelect);
-
-                        while($row = $postQuery -> fetch_assoc()){  //Post array
-                            
-                            $postTitle = $row['post_title'];
-                            $postAuthor = $row['post_author'];
-                            $postDate = $row['post_date'];
-                            $postImg = $row['post_image'];  // Post image
-                            $postContent = $row['post_content']; ?>
-                        
-                            
                             <h2>
                                 <a href="#"><?php echo $postTitle;?></a>
                             </h2>
@@ -67,7 +55,11 @@
 
                             <hr>
 
-                        <?php } ?>
+                        <?php }
+                        }
+                        ?>
+
+                    <?php }?> 
             </div>
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
@@ -86,6 +78,9 @@
                                 </button>
                                 </span>
                             </div>
+                            <?php if(isset($errorMessage)){?>
+                                <p class="text-danger"><?php echo $errorMessage;?></p>
+                                <?php }?>
                         </form>   
                     <!-- /.input-group -->
                 </div>
