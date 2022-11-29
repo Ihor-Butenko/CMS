@@ -2,7 +2,7 @@
 
 <?php include "./components/header.php"; ?>
 
-<?php require_once("./db/db.php"); ?>
+<?php include "./db/db.php"; ?>
 
 <body>
 
@@ -59,29 +59,9 @@
 
                 <!-- Blog Search Well -->
 
-                <div class="well">
+                <?php include "components/search.php"?>
 
-
-                <?php
-                            
-                    if(isset($_GET['submit'])){
-
-                        $search = $_GET['search'];
-
-                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
-
-                        $searchQuery = $connect -> query($searchQuery);
-
-                        if(mysqli_num_rows($searchQuery) == 0){
-                            echo "NO RESULT";
-                        }else{
-                            echo "SEARCH COMPLETE";
-                        }
-
-                    }
-
-                ?>
-
+                <div class="well">              
                     <h4>Blog Search</h4>
                         <form>
                             <div class="input-group">
@@ -92,6 +72,9 @@
                                 </button>
                                 </span>
                             </div>
+                            <?php if(isset($_GET['submit'])){ ?>
+                                <div><?php echo "<p class='text-danger'>$searchError</p>"; ?></div>
+                            <?php }?>
                         </form>   
                     <!-- /.input-group -->
                 </div>
