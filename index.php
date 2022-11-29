@@ -15,26 +15,11 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                
-            <?php
-                        
-                    if(isset($_POST['submit'])){
+                <h1 class="page-header">
+                    Page Heading
+                    <small>Secondary Text</small>
+                </h1>
 
-                        $search = $_POST['search'];
-
-                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
-
-                        $searchQuery = $connect -> query($searchQuery);
-
-                        if(mysqli_num_rows($searchQuery) == 0){
-                             echo "NO RESULT";
-                        }else{
-                            echo "SEARCH COMPLETE";
-                        }
-
-                    }
-        
-            ?>
                 <!-- First Blog Post -->
 
                 <?php 
@@ -91,38 +76,7 @@
                 </div>
 
                 <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.col-lg-6 -->
-                    </div>
-                    <!-- /.row -->
-                </div>
+                <?php include "./components/categories.php"?>
 
                 <!-- Side Widget Well -->
                 <div class="well">
