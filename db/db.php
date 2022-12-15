@@ -8,7 +8,7 @@
     $host = 'localhost';
     $username = 'admin';
     $password = 'admin';
-    $name = 'cms';
+    $name = 'udemy-cms';
 
         // foreach($db as $key => $value){
         //     define($key, $value);

@@ -2,7 +2,7 @@
 
 <?php include "./components/header.php"; ?>
 
-<?php include "./db/db.php"; ?>
+<?php require_once("./db/db.php"); ?>
 
 <body>
 
@@ -15,28 +15,31 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
-                <!-- First Blog Post -->
-
-                <?php 
                 
-                    $postSelect = "SELECT * FROM post";   
-
-                    $postQuery = $connect -> query($postSelect);
-
-                        while($row = $postQuery -> fetch_assoc()){  //Post array
-                            
-                            $postTitle = $row['post_title'];
-                            $postAuthor = $row['post_author'];
-                            $postDate = $row['post_date'];
-                            $postImg = $row['post_image'];  // Post image
-                            $postContent = $row['post_content']; ?>
+            <?php
                         
-                            
+                    if(isset($_POST['submit'])){
+
+                        $search = $_POST['search'];
+
+                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
+
+                        $searchQuery = $connect -> query($searchQuery);
+
+                        $errorMessage = "";
+
+                        if(mysqli_num_rows($searchQuery) == 0){
+                            $errorMessage = "Ooops...Nothinng found!";
+                        }else{   
+                                while($row = $searchQuery -> fetch_assoc()){  //Post array
+                                    
+                                    $postTitle = $row['post_title'];
+                                    $postAuthor = $row['post_author'];
+                                    $postDate = $row['post_date'];
+                                    $postImg = $row['post_image'];  // Post image
+                                    $postContent = $row['post_content'];
+                        ?>
+
                             <h2>
                                 <a href="#"><?php echo $postTitle;?></a>
                             </h2>
@@ -52,37 +55,18 @@
 
                             <hr>
 
-                        <?php } ?>
+                        <?php }
+                        }
+                        ?>
+
+                    <?php }?> 
             </div>
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
 
-                <?php include "components/search.php"?>
-
                 <div class="well">
-
-
-                <?php
-                            
-                    if(isset($_GET['submit'])){
-
-                        $search = $_GET['search'];
-
-                        $searchQuery = "SELECT * FROM `post` WHERE post_tags LIKE '%$search%'";
-
-                        $searchQuery = $connect -> query($searchQuery);
-
-                        if(mysqli_num_rows($searchQuery) == 0){
-                            echo "NO RESULT";
-                        }else{
-                            echo "SEARCH COMPLETE";
-                        }
-
-                    }
-
-                ?>
 
                     <h4>Blog Search</h4>
                         <form method="post" action="search.php">
@@ -94,15 +78,14 @@
                                 </button>
                                 </span>
                             </div>
-                            <?php if(isset($_GET['submit'])){ ?>
-                                <div><?php echo "<p class='text-danger'>$searchError</p>"; ?></div>
-                            <?php }?>
+                            <?php if(isset($errorMessage)){?>
+                                <p class="text-danger"><?php echo $errorMessage;?></p>
+                                <?php }?>
                         </form>   
                     <!-- /.input-group -->
                 </div>
 
-                <!-- Blog Categories Well -->
-                <?php include "./components/categories.php"?>
+                <?php include "./components/categories.php";?>
 
                 <!-- Side Widget Well -->
                 <div class="well">
