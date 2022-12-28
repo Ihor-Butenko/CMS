@@ -1,3 +1,31 @@
+<?php
+
+    if(isset($_POST['add'])){
+        
+        $postTitle = $_POST['title'];
+        $postCategoryID = $_POST['category'];
+        $postAuthor = $_POST['author'];
+        $postStatus = $_POST['status'];
+        $postTags = $_POST['tags'];
+        $postContent = $_POST['content'];
+
+        $postImage = $_FILES['image']['name'];
+        $postImageTemp = $_FILES['image']['tmp_name'];
+
+        $postDate = date('d-m-y');
+
+        $postCommentCount = 4;
+
+        move_uploaded_file($postImageTemp, "../image/$postImage");      
+
+        $insertPostQuery = "INSERT INTO post(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) VALUES ('$postCategoryID', '$postTitle', '$postAuthor', 'now()', '$postImage', '$postContent', '$postTags', '$postCommentCount', '$postStatus')";
+
+        $postInsert = $connect->query($insertPostQuery);
+
+    }
+
+?>
+
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
@@ -34,6 +62,8 @@
         <label for="content">Post Content</label>
         <textarea class="form-control" name="content" id="" cols="30" rows="10"></textarea>
     </div>
+
+    <button name="add">add</button>
 
 
 
