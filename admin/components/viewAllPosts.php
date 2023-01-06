@@ -45,10 +45,26 @@
             echo "<th>$postTags</th>";
             echo "<th>$postComments</th>";
             echo "<th>$postDate</th>";
+            echo "<th><a href=\"?delete=$postID\">Delete</a></th>";
             // echo "<th><a href='categories.php?delete=$categoryID'>Delete</a></th>";
             // echo "<th><a href='categories.php?update=$categoryID'>Upadate</a></th>";
             echo "</tr>";
         }
+        ?>
+
+
+
+        <?php
+        
+            if(isset($_GET['delete'])){
+                
+                $deletePostId = $_GET['delete'];
+
+                $deletePost = "DELETE FROM post WHERE post_id = $deletePostId";
+                $deleteQuery = $connect->query($deletePost);
+
+            }
+
         ?>
 
     </tbody>

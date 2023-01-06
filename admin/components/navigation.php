@@ -46,14 +46,15 @@
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                        </ul>
+                            <ul id="demo" class="collapse">
+                                <li>
+                                    <a href="#">Dropdown Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Dropdown Item</a>
+                                </li>
+                            </ul>
+                        </a>
                     </li>
                     <li>
                         <a href="index.php"><i class="fa fa-fw fa-file"></i> Comments</a>
